@@ -1,0 +1,78 @@
+{
+    "locations": [
+        {
+            "name": "North Park Park",
+            "address": "88 Park St.",
+            "id": 1
+        },
+        {
+            "name": "South Wind Meadows",
+            "address": "999 Smith Rd.",
+            "id": 2
+        }
+    ],
+
+    "animals": [
+        {
+            "id": 1,
+            "name": "Snuggles",
+            "breed": "Great Dane",
+            "locationId": 1,
+            "customerId": 2
+        },
+        {
+            "id": 2,
+            "name": "Butch",
+            "breed": "Pug",
+            "locationId": 2,
+            "customerId": 1
+        }
+    ],
+
+    "customers": [
+        {
+            "id": 1,
+            "name": "Hank Hill",
+            "address": "11 Ave Rd."
+        },
+        {
+            "id": 2,
+            "name": "Barney Rubble",
+            "address": "22 Road Ave."
+        },
+        {
+            "id": 3,
+            "name": "George Jettson",
+            "address": "33 County St."
+        },
+        {
+            "id": 4,
+            "name": "Geezer Butler",
+            "address": "44 Street Blvd."
+        }
+    ],
+
+    "employees": [
+        {
+            "id": 1,
+            "name": "Susan Strong",
+            "locationId": 1
+        },
+        {
+            "id": 2,
+            "name": "Marty Smith",
+            "locationId": 2
+        },
+        {
+            "id": 3,
+            "name": "Janice Nice",
+            "locationId": 3
+        },
+        {
+            "id": 4,
+            "name": "Joe Redd",
+            "locationId": 4
+        }
+    ]
+}
+
