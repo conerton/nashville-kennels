@@ -4,6 +4,10 @@ import { LocationProvider } from "./location/LocationProvider";
 import { AnimalProvider } from "./animal/AnimalProvider";
 import { LocationList } from "./location/LocationList";
 import { AnimalList } from "./animal/AnimalList";
+import { CustomerProvider } from "./customer/CustomerProvider";
+import { EmployeeProvider } from "./employee/EmployeeProvider";
+import { EmployeeList } from "./employee/EmployeeList";
+import { EmployeeForm } from "./employee/EmployeeForm";
 
 export const ApplicationViews = (props) => {
   return (
@@ -25,6 +29,25 @@ export const ApplicationViews = (props) => {
           </CustomerProvider>
         </LocationProvider>
       </AnimalProvider>
+
+      <AnimalProvider>
+        <LocationProvider>
+          <EmployeeProvider>
+            <Route exact path="/employees" render={
+              props => {
+                console.log("props from react router dom", props)
+                return <EmployeeList {...props} message="Hello C44" />
+                // <EmployeeList history={props.history} location={props.location} match={props.match} message="Hello C44" />
+              }
+            } />
+            <Route path="/employees/create" render={
+              props => <EmployeeForm {...props} />
+            } />
+          </EmployeeProvider>
+        </LocationProvider>
+      </AnimalProvider>
+
+
     </>
   );
 };
