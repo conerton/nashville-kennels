@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
-import { CustomerContext } from "../customers/CustomerProvider"
-import { LocationContext } from "../locations/LocationProvider"
+import { CustomerContext } from "../customer/CustomerProvider"
+import { LocationContext } from "../location/LocationProvider"
 import { Animal } from "./Animal"
 import { AnimalContext } from "./AnimalProvider"
 
