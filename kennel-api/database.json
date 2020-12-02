@@ -17,7 +17,7 @@
       "name": "Snuggles",
       "breed": "Great Dane",
       "locationId": 1,
-      "customerId": 2
+      "customerId": 1
     },
     {
       "id": 2,
@@ -29,24 +29,10 @@
   ],
   "customers": [
     {
-      "id": 1,
-      "name": "Hank Hill",
-      "address": "11 Ave Rd."
-    },
-    {
-      "id": 2,
-      "name": "Barney Rubble",
-      "address": "22 Road Ave."
-    },
-    {
-      "id": 3,
-      "name": "George Jettson",
-      "address": "33 County St."
-    },
-    {
-      "id": 4,
-      "name": "Geezer Butler",
-      "address": "44 Street Blvd."
+      "email": "email@email.com",
+      "password": "0000",
+      "name": "Ben Smith",
+      "id": 1
     }
   ],
   "employees": [
