@@ -1,41 +1,50 @@
-import React, { useContext, useEffect } from "react"
-import { CustomerContext } from "../customer/CustomerProvider"
-import { LocationContext } from "../location/LocationProvider"
-import { Animal } from "./Animal"
-import { AnimalContext } from "./AnimalProvider"
+import React, { useState, useContext, useEffect } from "react";
+import { AnimalContext } from "./AnimalProvider";
+import { Animal } from "./Animal";
+import "./Animal.css";
 
-export const AnimalList = (props) => {
-  // This state changes when `getAnimals()` is invoked below
-  const { animals, getAnimals } = useContext(AnimalContext)
-  const { locations, getLocations } = useContext(LocationContext)
-  const { customers, getCustomers } = useContext(CustomerContext)
+export const AnimalList = ({ history }) => {
+  const { animals, searchTerms, getAnimals } = useContext(AnimalContext);
 
-  useEffect(
-    () => {
-      console.log("AnimalList: Initial render before data")
-      getLocations()
-        getCustomers()
-        getAnimals()
-    },
-    []
-  )
+  /*
+      Since you are no longer ALWAYS going to be displaying all animals
+  */
+  const [filteredAnimals, setFiltered] = useState([]);
 
-  if( animals.length && locations.length && customers.length ) {
+  useEffect(() => {
+    getAnimals();
+  }, []);
+
+  /*
+      This effect hook function will run when the following two state changes happen:
+          1. The animal state changes. First when it is created, then once you get the animals from the API
+          2. When the search terms change, which happens when the user types something in the AnimalSearch component
+  */
+  useEffect(() => {
+    if (searchTerms !== "") {
+      // If the search field is not blank, display matching animals
+      const subset = animals.filter((animal) =>
+        animal.name.toLowerCase().includes(searchTerms.toLowerCase())
+      );
+      setFiltered(subset);
+    } else {
+      // If the search field is blank, display all animals
+      setFiltered(animals);
+    }
+  }, [searchTerms, animals]);
+
   return (
-    <div className="animals">
-    {/* {console.log(animals, locations, customers)} */}
+    <>
+      <h1>Animals</h1>
 
-    <button onClick={() => props.history.push("/animals/create")}>
-        Add Dog
-        </button>
-      {
-        animals.map(animal => {
-          const owner = customers.find(c => c.id === animal.customerId)
-          const clinic = locations.find(l => l.id === animal.locationId)
-          // debugger
-          return <Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
-        })
-      }
-    </div>
-  )
-    } else { return <div></div> }}
+      <button onClick={() => history.push("/animals/create")}>
+        Make Reservation
+      </button>
+      <div className="animals">
+        {filteredAnimals.map((animal) => {
+          return <Animal key={animal.id} animal={animal} />;
+        })}
+      </div>
+    </>
+  );
+};
