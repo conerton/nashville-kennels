@@ -13,13 +13,6 @@
   ],
   "animals": [
     {
-      "id": 1,
-      "name": "Snuggles",
-      "breed": "Great Dane",
-      "locationId": 1,
-      "customerId": 1
-    },
-    {
       "id": 2,
       "name": "Butch",
       "breed": "Pug",
@@ -45,16 +38,6 @@
       "id": 2,
       "name": "Marty Smith",
       "locationId": 2
-    },
-    {
-      "id": 3,
-      "name": "Janice Nice",
-      "locationId": 3
-    },
-    {
-      "id": 4,
-      "name": "Joe Redd",
-      "locationId": 4
     },
     {
       "name": "Shawn",

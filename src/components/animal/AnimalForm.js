@@ -1,13 +1,13 @@
-import React, { useContext, useRef, useEffect } from "react"
-import { CustomerContext } from "../customer/CustomerProvider"
-import { LocationContext } from "../location/LocationProvider"
-import { AnimalContext } from "../animal/AnimalProvider"
-import "./Animal.css"
+import React, { useContext, useRef, useEffect } from "react";
+import { CustomerContext } from "../customer/CustomerProvider";
+import { LocationContext } from "../location/LocationProvider";
+import { AnimalContext } from "../animal/AnimalProvider";
+import "./Animal.css";
 
 export const AnimalForm = (props) => {
-  const { addAnimals } = useContext(AnimalContext)
-  const { locations, getLocations } = useContext(LocationContext)
-  const { customers, getCustomers } = useContext(CustomerContext)
+  const { addAnimals } = useContext(AnimalContext);
+  const { locations, getLocations } = useContext(LocationContext);
+  const { customers, getCustomers } = useContext(CustomerContext);
 
   /*
         Create references that can be attached to the input
@@ -16,17 +16,18 @@ export const AnimalForm = (props) => {
         the save button.
         No more `document.querySelector()` in React.
     */
-  const name = useRef(null)
+  const name = useRef(null);
   // useRef(null) returns an object that has a current property set to the value of the argument i.e., {current: null}
-  const location = useRef(null)
-  const customer = useRef(null)
+  const location = useRef(null);
+  const customer = useRef(null);
+  const breed = useRef(null);
 
   /*
         Get animal state and location state on initialization.
     */
   useEffect(() => {
-    getCustomers().then(getLocations)
-  }, [])
+    getCustomers().then(getLocations);
+  }, []);
 
   const constructNewAnimal = () => {
     /*
@@ -35,21 +36,25 @@ export const AnimalForm = (props) => {
         can't just ask for the `.value` property directly,
         but rather `.current.value` now in React.
     */
-    const locationId = parseInt(location.current.value)
-    const customerId = parseInt(customer.current.value)
-    const animalName = name.current.value
+    const locationId = parseInt(location.current.value);
+    const customerId = parseInt(customer.current.value);
+    const animalName = name.current.value;
+    const animalBreed = breed.current.value;
 
     if (locationId === 0 || customerId === 0 || animalName === "") {
-      window.alert("Please select a location and an customer and provide a name")
+      window.alert(
+        "Please select a location and an customer and provide a name"
+      );
     } else {
       addAnimals({
         name: animalName,
+        breed: animalBreed,
         locationId,
-        customerId
-      })
-        .then(() => props.history.push("/animal"))
+        customerId,
+      }).then(() => props.history.push("/animals"));
     }
-  }
+    console.log("ADD ANIMALS", addAnimals());
+  };
 
   return (
     <form className="animalForm">
@@ -57,15 +62,45 @@ export const AnimalForm = (props) => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="animalName">Dog name: </label>
-          <input type="text" id="animalName" ref={name} required autoFocus className="form-control" placeholder="Dog name" />
+          <input
+            type="text"
+            id="animalName"
+            ref={name}
+            required
+            autoFocus
+            className="form-control"
+            placeholder="Dog name"
+          />
         </div>
       </fieldset>
+
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="animalBreed">Dog Breed: </label>
+          <input
+            type="text"
+            id="animalBreed"
+            ref={breed}
+            required
+            autoFocus
+            className="form-control"
+            placeholder="Dog breed"
+          />
+        </div>
+      </fieldset>
+
       <fieldset>
         <div className="form-group">
           <label htmlFor="location">Assign to location: </label>
-          <select defaultValue="" name="location" ref={location} id="animalLocation" className="form-control" >
+          <select
+            defaultValue=""
+            name="location"
+            ref={location}
+            id="animalLocation"
+            className="form-control"
+          >
             <option value="0">Select a location</option>
-            {locations.map(e => (
+            {locations.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.name}
               </option>
@@ -76,9 +111,15 @@ export const AnimalForm = (props) => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="location">Caretaker for: </label>
-          <select defaultValue="" name="Customer" ref={customer} id="customerAnimal" className="form-control" >
+          <select
+            defaultValue=""
+            name="Customer"
+            ref={customer}
+            id="customerAnimal"
+            className="form-control"
+          >
             <option value="0">Select an Customer</option>
-            {customers.map(e => (
+            {customers.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.name}
               </option>
@@ -86,14 +127,16 @@ export const AnimalForm = (props) => {
           </select>
         </div>
       </fieldset>
-      <button type="submit"
-        onClick={evt => {
-          evt.preventDefault() // Prevent browser from submitting the form
-          constructNewAnimal()
+      <button
+        type="submit"
+        onClick={(evt) => {
+          evt.preventDefault(); // Prevent browser from submitting the form
+          constructNewAnimal();
         }}
-        className="btn btn-primary">
+        className="btn btn-primary"
+      >
         Save Animal
-        </button>
+      </button>
     </form>
-  )
-}
+  );
+};
